@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
 			type: Sequelize.INTEGER,
 			allowNull: false,
 			unique: true,
+			autoIncrement: true, 
 			validate: {
 				min: 0,
 				max: 255 

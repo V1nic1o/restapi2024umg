@@ -3,6 +3,7 @@ let router = express.Router();
 
 const libros = require('../controllers/libros_controller.js');
 
+// Definición de rutas para "libros"
 router.post('/api/libros/create', libros.create);
 router.get('/api/libros/all', libros.retrieveAllLibros);
 router.get('/api/libros/onebyid/:id', libros.getLibroById);

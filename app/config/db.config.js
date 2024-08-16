@@ -1,5 +1,3 @@
-
-
 const env = require('./env.js');
  
 const Sequelize = require('sequelize');
@@ -27,6 +25,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
  
-db.Customer = require('../models/libros.model.js')(sequelize, Sequelize);
+// Aquí cambiamos 'Customer' a 'Libro' para que coincida con el modelo correcto
+db.Libro = require('../models/libros.model.js')(sequelize, Sequelize);
  
 module.exports = db;

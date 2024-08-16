@@ -1,38 +1,36 @@
-
-
 const express = require('express');
 const app = express();
-
-var bodyParser = require('body-parser');
- 
+const bodyParser = require('body-parser');
 const db = require('./app/config/db.config.js');
-  
-// force: true will drop the table if it already exists
-db.sequelize.sync({force: true}).then(() => {
-  console.log('Drop and Resync with { force: true }');
-}); 
+const cors = require('cors');
 
-let router = require('./app/routers/router.js');
-
-const cors = require('cors')
+// Configuración de CORS
 const corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200
-}
+};
 app.use(cors(corsOptions));
 
+// Middleware para parsear el body de las solicitudes como JSON
 app.use(bodyParser.json());
-app.use('/', router);
-app.get("/",(req,res) => {
-  
-  res.json({mesage:"Bienvenido Estudiantes de UMG"});
-})
 
-// Create a Server
+// Rutas
+let router = require('./app/routers/router.js');
+app.use('/', router);
+
+// Ruta de bienvenida
+app.get("/", (req, res) => {
+  res.json({ message: "Bienvenido Estudiantes de UMG" });
+});
+
+// Sincronización de la base de datos
+db.sequelize.sync({ force: true }).then(() => {
+  console.log('Drop and Resync with { force: true }');
+});
+
+// Creación del servidor
 const server = app.listen(8080, function () {
- 
-  let host = server.address().address
-  let port = server.address().port
- 
-  console.log("App listening at http://%s:%s", host, port); 
-})
+  let host = server.address().address;
+  let port = server.address().port;
+  console.log("App listening at http://%s:%s", host, port);
+});
