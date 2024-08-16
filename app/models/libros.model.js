@@ -1,15 +1,16 @@
 module.exports = (sequelize, Sequelize) => {
-	const Libro = sequelize.define('libros', {	
-		codigoLibro: {
-			type: Sequelize.INTEGER,
-			allowNull: false,
-			unique: true,
-			autoIncrement: true, 
-			validate: {
-				min: 0,
-				max: 255 
-			}
-		},
+	const Libro = sequelize.define("libro", {
+	  id: {
+		type: Sequelize.INTEGER,
+		autoIncrement: true,  
+		primaryKey: true
+	  },
+	  titulo: {
+		type: Sequelize.STRING
+	  },
+	  autor: {
+		type: Sequelize.STRING
+	  },
 		nombreLibro: {
 			type: Sequelize.STRING,
 			allowNull: false,
